@@ -3,6 +3,33 @@ class Ingredient < ApplicationRecord
   
   validates :title, presence: true
 
+  scope :to_ask, -> (available: nil, not_available: nil, count: 10) do
+    sql = 'SELECT ingredients.* FROM ingredients'
+    sql << ' LEFT JOIN recipes_ingredients ON recipes_ingredients.ingredient_id = ingredients.id'
+
+    where = []
+    
+    # skip already confirmed ingredients (no need to ask about them again)
+    where << 'ingredients.id NOT IN (:available)' if available&.any?
+    
+    # skip the ingredients which are related to the recipes which depend on not available ingredients
+    if not_available&.any?
+      where << 'recipes_ingredients.recipe_id NOT IN (
+          SELECT DISTINCT recipe_id FROM recipes_ingredients WHERE ingredient_id IN (:not_available)
+        )'
+    end
+
+    sql << " WHERE #{where.join ' AND '}" if where.any?
+    sql << ' GROUP BY ingredients.id'
+
+    # prioritize the most meaningful ingredients (with higher count of usages)
+    sql << ' ORDER BY COUNT(recipes_ingredients.id) DESC, ingredients.id DESC'
+
+    sql << ' LIMIT :count'
+    
+    find_by_sql([sql, available: available, not_available: not_available, count: count])
+  end
+
   class << self
     def clean_title(title)
       words = title.downcase.split
