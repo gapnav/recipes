@@ -10,6 +10,8 @@ import "channels"
 import { createApp } from 'vue'
 import { VuesticPlugin } from 'vuestic-ui'
 import 'vuestic-ui/dist/vuestic-ui.css'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import App from '../app.vue'
 
 Rails.start()
@@ -19,5 +21,6 @@ ActiveStorage.start()
 document.addEventListener('DOMContentLoaded', () => {
   const app = createApp(App);
   app.use(VuesticPlugin)
+  app.use(VueAxios, axios)
   app.mount("#vue-app");
 });

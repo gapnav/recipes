@@ -1,0 +1,12 @@
+{
+  recipes: @recipes.map do |recipe|
+    recipe.slice(:id, :title, :image).merge(
+      ingredients: recipe.recipes_ingredients.map do |ri|
+        ri.slice(:id, :ingredient_id, :title)
+      end
+    )
+  end,
+  ingredients: @ingredients.map do |ingredient|
+    ingredient.slice(:id, :title)
+  end
+}
