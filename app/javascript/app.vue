@@ -1,24 +1,27 @@
 <template lang="pug">
-#app
-  p {{ message }} :):):)
+va-content
+  .main-container
+    h1 Recipes Database
+    recipes
 
 </template>
 
 <script>
+import Recipes from 'packs/components/recipes.vue';
 
 export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
+  components: { Recipes },
+
+  data() {
+      return {
+        message: "Hello Vue!"
+      }
     }
   }
-}
 </script>
 
 <style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-  color: red
-}
+  .main-container {
+    padding: 10px;
+  }
 </style>

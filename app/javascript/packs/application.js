@@ -8,6 +8,8 @@ import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import { createApp } from 'vue'
+import { VuesticPlugin } from 'vuestic-ui'
+import 'vuestic-ui/dist/vuestic-ui.css'
 import App from '../app.vue'
 
 Rails.start()
@@ -16,5 +18,6 @@ ActiveStorage.start()
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = createApp(App);
+  app.use(VuesticPlugin)
   app.mount("#vue-app");
 });
