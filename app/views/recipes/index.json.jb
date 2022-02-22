@@ -2,11 +2,20 @@
   recipes: @recipes.map do |recipe|
     recipe.slice(:id, :title, :image).merge(
       ingredients: recipe.recipes_ingredients.map do |ri|
-        ri.slice(:id, :ingredient_id, :title)
+        ri.slice(:id, :ingredient_id, :title).merge(
+          available: params[:available]&.include?(ri.ingredient.id.to_s)
+        )
       end
     )
   end,
-  ingredients: @ingredients.map do |ingredient|
-    ingredient.slice(:id, :title)
-  end
+
+  ingredients: {
+    to_ask: @ingredients.map do |ingredient|
+      ingredient.slice(:id, :title)
+    end
+  }.merge(
+    @selected.map{|key, ingredients|
+      [key, ingredients.map{|ing| ing.slice(:id, :title)}]
+    }.to_h
+  )
 }

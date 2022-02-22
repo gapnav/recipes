@@ -13,13 +13,26 @@ va-list-item.recipe(
           li(
             v-for="ingredient in recipe.ingredients"
             v-bind:key="ingredient.id"
-          ) {{ ingredient.title }}
+            v-bind:class="{available: ingredient.available}"
+          )
+            | {{ ingredient.title }}
+            va-icon.ml-1(
+              v-if="!ingredient.available"
+              name="check"
+              color="info"
+              size="small"
+              v-on:click.stop="markIngredient(ingredient.ingredient_id, true)"
+            )
+            va-icon.ml-1(
+              name="close"
+              color="danger"
+              size="small"
+              v-on:click.stop="markIngredient(ingredient.ingredient_id, false)"
+            )
 
 </template>
 
 <script>
-import Recipe from './recipe.vue';
-
 export default {
   props: ['recipe'],
 
@@ -27,6 +40,24 @@ export default {
     return {
       full: false
     }
+  },
+
+  methods: {
+    markIngredient(ingerdient_id, available){
+      this.$emit('mark_ingredient', ingerdient_id, available);
+    }
   }
 }
 </script>
+
+<style scoped lang="scss">
+  .va-list-item-label {
+    ul {
+      li {
+        &.available {
+          color: var(--va-info)
+        }
+      }
+    }
+  }
+</style>
