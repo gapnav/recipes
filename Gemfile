@@ -55,12 +55,12 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
   gem 'database_cleaner' # Keeps test database clean between each test
-
-  # adding of these 3 gems is supposed to solve ruby 3.1 issue - https://github.com/mikel/mail/pull/1439#issuecomment-1002792758
-  gem 'net-smtp'
-  gem 'net-imap'
-  gem 'net-pop'
 end
+
+# adding of these 3 gems is supposed to solve ruby 3.1 issue - https://github.com/mikel/mail/pull/1439#issuecomment-1002792758
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
