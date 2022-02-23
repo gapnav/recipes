@@ -1,24 +1,37 @@
-# README
+## Problem statement
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> **It's dinner time ! Create an application that helps users find the most relevant recipes that they can prepare with the ingredients that they have at home**
 
-Things you may want to cover:
+## Objective
 
-* Ruby version
+Deliver an application prototype to answer the above problem statement.
 
-* System dependencies
+By prototype, we mean:
+- something usable, yet as simple as possible
+- UI / design is not important
+- we do not expect features which are outside the basic scope of the problem
 
-* Configuration
+We expect to use this prototype as a starting point to discuss current implenentation details, as well as ideas for improvement.
 
-* Database creation
+#### Tech must-haves
+- [ ] MySQL / PostgreSQL or any other MySQL-compatible database.
+- [ ] A backend application which responds to queries
+- [ ] A web interface (can be VERY simple)
+- [ ] Ruby on Rails
 
-* Database initialization
+#### Bonus points
+- [ ] React
+- [ ] Application is hosted on heroku
 
-* How to run the test suite
+## Data
+The [english-language recipes](db/files/recipes-english.json) scraped from www.allrecipes.com with [recipe-scrapers](https://github.com/hhursev/recipe-scrapers)
 
-* Services (job queues, cache servers, search engines, etc.)
+## Deliverable
+The project is deployed to [Heroku](https://recipes-gn.herokuapp.com/)
 
-* Deployment instructions
-
-* ...
+## Used technologies
+- Ruby 3.1.0
+- Ruby on Rails 6.1.4.6
+- PostgreSQL
+- Vue.js 3.2.31
+- Vuestic UI 1.3.4
