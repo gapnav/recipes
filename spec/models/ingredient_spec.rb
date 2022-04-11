@@ -8,7 +8,7 @@ RSpec.describe Ingredient, type: :model do
     result.to_a.sort_by(&:last).last(100).sample(20).map(&:first)
   end
   let(:available) {|example| example.metadata[:available] ? meaningful_ingredients.first(10) : []}
-  let(:not_available) {|example| example.metadata[:not_available] ? meaningful_ingredients.first(10) : []}
+  let(:not_available) {|example| example.metadata[:not_available] ? meaningful_ingredients.last(10) : []}
   let(:count) { 10 }
 
   describe '#to_ask' do
